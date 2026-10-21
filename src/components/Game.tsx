@@ -3,11 +3,11 @@
 import { Canvas } from "@react-three/fiber";
 import { Sky, Stars, KeyboardControls } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useCallback } from "react";
 import { Player } from "./Player";
 import { World } from "./World";
 import { GameUI } from "./GameUI";
-import { useGameStore } from "@/store/gameStore";
+import * as THREE from "three";
 
 const keyboardMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -19,55 +19,53 @@ const keyboardMap = [
 ];
 
 export default function Game() {
-  const [ready, setReady] = useState(false);
+  const [bullets, setBullets] = useState<
+    { id: number; origin: THREE.Vector3; dir: THREE.Vector3 }[]
+  >([]);
 
-  useEffect(() => {
-    const handleClick = () => {
-      document.body.requestPointerLock?.();
-    };
-    window.addEventListener("click", handleClick);
-    setReady(true);
-    return () => window.removeEventListener("click", handleClick);
+  const handleShoot = useCallback((origin: THREE.Vector3, dir: THREE.Vector3) => {
+    const id = Date.now() + Math.random();
+    setBullets((prev) => [...prev, { id, origin: origin.clone(), dir: dir.clone() }]);
   }, []);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full bg-black">
       <KeyboardControls map={keyboardMap}>
         <Canvas
           shadows
-          camera={{ position: [0, 5, 10], fov: 75, near: 0.1, far: 1000 }}
+          camera={{ position: [0, 5, 10], fov: 75, near: 0.1, far: 400 }}
           gl={{ antialias: true, powerPreference: "high-performance" }}
           dpr={[1, 1.5]}
         >
           <color attach="background" args={["#87CEEB"]} />
-          <fog attach="fog" args={["#87CEEB", 80, 250]} />
+          <fog attach="fog" args={["#a0d8ef", 60, 220]} />
 
-          <ambientLight intensity={0.4} />
+          <ambientLight intensity={0.45} />
           <directionalLight
             castShadow
-            position={[50, 80, 30]}
-            intensity={1.2}
-            shadow-mapSize={[2048, 2048]}
-            shadow-camera-far={200}
-            shadow-camera-left={-100}
-            shadow-camera-right={100}
-            shadow-camera-top={100}
-            shadow-camera-bottom={-100}
+            position={[40, 70, 25]}
+            intensity={1.35}
+            shadow-mapSize={[1024, 1024]}
+            shadow-camera-far={160}
+            shadow-camera-left={-80}
+            shadow-camera-right={80}
+            shadow-camera-top={80}
+            shadow-camera-bottom={-80}
           />
-          <hemisphereLight intensity={0.3} groundColor="#3a5f0b" />
+          <hemisphereLight intensity={0.35} groundColor="#2a5c1a" />
 
           <Sky
             distance={450000}
-            sunPosition={[50, 40, 20]}
-            inclination={0.6}
-            azimuth={0.25}
+            sunPosition={[40, 35, 20]}
+            inclination={0.55}
+            azimuth={0.2}
           />
-          <Stars radius={300} depth={60} count={4000} factor={4} saturation={0} fade speed={0.5} />
+          <Stars radius={280} depth={50} count={3500} factor={3.5} saturation={0.2} fade speed={0.4} />
 
           <Suspense fallback={null}>
-            <Physics gravity={[0, -20, 0]} debug={false}>
-              <World />
-              <Player />
+            <Physics gravity={[0, -22, 0]}>
+              <World bullets={bullets} setBullets={setBullets} />
+              <Player onShoot={handleShoot} />
             </Physics>
           </Suspense>
         </Canvas>
