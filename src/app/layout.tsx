@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sayanox Open World 3D | Advanced Browser Game",
+  title: "SAYANOX STRIKE | Anime Open-World Shooter",
   description:
-    "Fully playable advanced 3D open-world game built with Next.js, React Three Fiber & Three.js. Explore, collect, survive.",
-  keywords: ["3d game", "open world", "react three fiber", "browser game", "sayanox"],
+    "Full-screen anime-style 3D open-world shooting game. Works on Android & PC. More advanced than Minecraft.",
+  keywords: ["3d game", "shooter", "anime", "open world", "android game", "browser game", "sayanox"],
 };
 
 export default function RootLayout({
