@@ -1,83 +1,61 @@
-# Sayanox Advanced 3D Open World Game
+# SAYANOX STRIKE — Anime Open-World Shooter
 
-A fully playable **advanced 3D open-world browser game** built with modern web technologies.
+**Full-screen • Android + PC • More advanced than Minecraft**
+
+A browser-based anime-style 3D open-world shooting game built with React Three Fiber.
 
 ## Features
 
-- **Large procedural terrain** with hills and valleys
-- **First-person movement** with WASD + mouse look + jump + sprint
-- **Physics** powered by Rapier (realistic gravity & collisions)
-- **120+ trees**, rocks, and environmental details
-- **25 collectible golden crystals** to find and gather
-- **Daytime sky + stars**, fog, shadows, and lighting
-- **Beautiful HUD** with score, health, and collectible counter
-- **Pointer lock** for immersive mouse control
-- Fully responsive and runs entirely in the browser
-
-## Tech Stack
-
-- **Next.js 15+** (App Router)
-- **React Three Fiber** + **Drei**
-- **Three.js**
-- **@react-three/rapier** (physics)
-- **Zustand** (state)
-- **Tailwind CSS**
-- **TypeScript**
+- Large open world with procedural terrain
+- First-person shooting with ammo + reload system
+- 18 floating anime-style crystal enemies
+- Kill counter + Score system
+- Full Android touch controls (joystick + fire/jump/reload buttons)
+- PC: WASD + Mouse look + Click to shoot
+- Fullscreen support
+- Beautiful anime-inspired HUD & vibrant colors
+- Physics-based movement (Rapier)
 
 ## Controls
 
-| Action     | Key              |
-|------------|------------------|
-| Move       | WASD / Arrow Keys|
-| Look       | Mouse            |
-| Jump       | Space            |
-| Sprint     | Shift            |
-| Collect    | Walk into crystals|
+### PC
+| Action | Input |
+|--------|-------|
+| Move | WASD / Arrow Keys |
+| Look | Mouse |
+| Shoot | Left Click |
+| Jump | Space |
+| Sprint | Shift |
+| Reload | R |
 
-## Getting Started
+### Android / Touch
+- Left Joystick → Move
+- FIRE button → Shoot
+- JUMP button
+- RLD button → Reload
+- Fullscreen button available
+
+## Tech Stack
+- Next.js 15
+- React Three Fiber + Drei
+- Three.js
+- @react-three/rapier
+- Zustand
+- Tailwind CSS
+- TypeScript
+
+## Run Locally
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open http://localhost:3000
 
-## Build & Deploy
-
-```bash
-npm run build
-npm start
-```
-
-Deploy instantly on **Vercel** (recommended).
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── page.tsx          # Entry with dynamic Game load
-│   ├── layout.tsx
-│   └── globals.css
-├── components/
-│   ├── Game.tsx          # Main Canvas + Physics
-│   ├── Player.tsx        # FPS controller + camera
-│   ├── World.tsx         # Terrain, trees, rocks, collectibles
-│   └── GameUI.tsx        # HUD + start screen
-└── store/
-    └── gameStore.ts      # Score, health, collectibles
-```
-
-## Author
-
-**Sayan Mahata**  
-GitHub: [sayan9168](https://github.com/sayan9168)  
-Sayanox Enterprises
+## Deploy on Vercel
+Just import the GitHub repo on vercel.com — one click deploy.
 
 ---
 
-Made with ❤️ for the open web.
+Made by **Sayanox** • Sayan Mahata
